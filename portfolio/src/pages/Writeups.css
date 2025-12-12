@@ -1,0 +1,123 @@
+.writeups-container {
+  min-height: 100vh;
+  padding: 4rem 6rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.back-button {
+  display: inline-block;
+  color: #a78bfa;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+  transform: translateX(-5px);
+}
+
+.writeups-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.writeups-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 3rem;
+}
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 4rem;
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+.ctf-folders {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.ctf-folder {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.ctf-name {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #a78bfa;
+  margin-bottom: 1.5rem;
+}
+
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.challenge-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.challenge-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(167, 139, 250, 0.5);
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+}
+
+.challenge-card h3 {
+  font-size: 1.25rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  word-break: break-word;
+}
+
+.read-more {
+  color: #a78bfa;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .writeups-container {
+    padding: 2rem;
+  }
+
+  .writeups-title {
+    font-size: 2rem;
+  }
+
+  .writeups-subtitle {
+    font-size: 1rem;
+  }
+
+  .ctf-name {
+    font-size: 1.5rem;
+  }
+
+  .challenges-grid {
+    grid-template-columns: 1fr;
+  }
+}

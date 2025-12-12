@@ -1,0 +1,28 @@
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/Home";
+import WriteupDetail from "./pages/WriteupDetail";
+import Writeups from "./pages/Writeups";
+
+function App() {
+  return (
+    <Router>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/writeups" element={<Writeups />} />
+          <Route path="/writeup/:ctf/:challenge" element={<WriteupDetail />} />
+        </Routes>
+
+        <footer className="footer">
+          <p>
+            © 2024 Mohamed Radhouen Boufath (Angel911) • Built with React &
+            TypeScript
+          </p>
+        </footer>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
