@@ -6,7 +6,7 @@ import Writeups from "./pages/Writeups";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/portfolio">
       <div className="app">
         <Routes>
           <Route path="/" element={<Home />} />
