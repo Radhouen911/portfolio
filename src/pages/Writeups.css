@@ -1,7 +1,7 @@
 .writeups-container {
   min-height: 100vh;
   padding: 4rem 6rem;
-  max-width: 1600px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -28,6 +28,7 @@
   font-size: 1.2rem;
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 3rem;
+  max-width: 600px;
 }
 
 .loading,
@@ -42,67 +43,138 @@
   color: #ff6b6b;
 }
 
+/* CTF Sections */
 .ctf-folders {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2.5rem;
 }
 
 .ctf-folder {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(167, 139, 250, 0.2);
-  border-radius: 16px;
-  padding: 2rem;
+  position: relative;
+}
+
+.ctf-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(167, 139, 250, 0.2);
+}
+
+.ctf-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
 }
 
 .ctf-name {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
-  color: #a78bfa;
-  margin-bottom: 1.5rem;
+  color: #fff;
+  margin: 0;
 }
 
+.ctf-count {
+  background: rgba(167, 139, 250, 0.2);
+  color: #c4b5fd;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-left: auto;
+}
+
+/* Challenge Cards */
 .challenges-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
 }
 
 .challenge-card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(167, 139, 250, 0.2);
-  border-radius: 12px;
-  padding: 1.5rem;
-  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  transition: all 0.25s ease;
   text-decoration: none;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 .challenge-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(167, 139, 250, 0.5);
-  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.4);
+  transform: translateX(5px);
+}
+
+.challenge-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.challenge-number {
+  width: 32px;
+  height: 32px;
+  background: rgba(167, 139, 250, 0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a78bfa;
+  flex-shrink: 0;
 }
 
 .challenge-card h3 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   color: #fff;
-  margin-bottom: 1rem;
-  word-break: break-word;
+  margin: 0;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .read-more {
   color: #a78bfa;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.25s ease;
 }
 
+.challenge-card:hover .read-more {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Empty State */
+.no-challenges {
+  color: rgba(255, 255, 255, 0.5);
+  font-style: italic;
+  padding: 1rem;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .writeups-container {
-    padding: 2rem;
+    padding: 2rem 1.5rem;
   }
 
   .writeups-title {
@@ -111,13 +183,42 @@
 
   .writeups-subtitle {
     font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .ctf-header {
+    flex-wrap: wrap;
+  }
+
+  .ctf-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.25rem;
   }
 
   .ctf-name {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+  }
+
+  .ctf-count {
+    margin-left: 0;
   }
 
   .challenges-grid {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .challenge-card {
+    padding: 1rem 1.25rem;
+  }
+
+  .challenge-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .read-more {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

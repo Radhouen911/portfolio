@@ -19,12 +19,12 @@ function Writeups() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchCTFFolders();
   }, []);
 
   const fetchCTFFolders = async () => {
     try {
-      // Fetch root folders from the CTF-Writeups repo
       const response = await fetch(
         "https://api.github.com/repos/Radhouen911/CTF-Writeups/contents/"
       );
@@ -34,7 +34,6 @@ function Writeups() {
       const data = await response.json();
       const folders = data.filter((item: any) => item.type === "dir");
 
-      // Fetch subfolders (challenges) for each CTF folder
       const foldersWithChallenges = await Promise.all(
         folders.map(async (folder: any) => {
           const challengesResponse = await fetch(
@@ -62,6 +61,16 @@ function Writeups() {
       setError(err instanceof Error ? err.message : "An error occurred");
       setLoading(false);
     }
+  };
+
+  const getCTFIcon = (name: string): string => {
+    const lowerName = name.toLowerCase();
+    if (lowerName.includes("hack") || lowerName.includes("htb")) return "🎯";
+    if (lowerName.includes("try") || lowerName.includes("thm")) return "🔓";
+    if (lowerName.includes("cyber")) return "🛡️";
+    if (lowerName.includes("root")) return "🌳";
+    if (lowerName.includes("pico")) return "🏴";
+    return "🚩";
   };
 
   if (loading) {
@@ -93,19 +102,34 @@ function Writeups() {
       <div className="ctf-folders">
         {ctfFolders.map((ctf) => (
           <div key={ctf.name} className="ctf-folder">
-            <h2 className="ctf-name">{ctf.name}</h2>
-            <div className="challenges-grid">
-              {ctf.challenges.map((challenge) => (
-                <Link
-                  key={challenge.path}
-                  to={`/writeup/${challenge.path}`}
-                  className="challenge-card"
-                >
-                  <h3>{challenge.name}</h3>
-                  <span className="read-more">Read writeup →</span>
-                </Link>
-              ))}
+            <div className="ctf-header">
+              <div className="ctf-icon">{getCTFIcon(ctf.name)}</div>
+              <h2 className="ctf-name">{ctf.name}</h2>
+              <span className="ctf-count">
+                {ctf.challenges.length}{" "}
+                {ctf.challenges.length === 1 ? "challenge" : "challenges"}
+              </span>
             </div>
+
+            {ctf.challenges.length > 0 ? (
+              <div className="challenges-grid">
+                {ctf.challenges.map((challenge, index) => (
+                  <Link
+                    key={challenge.path}
+                    to={`/writeup/${challenge.path}`}
+                    className="challenge-card"
+                  >
+                    <div className="challenge-info">
+                      <span className="challenge-number">{index + 1}</span>
+                      <h3>{challenge.name}</h3>
+                    </div>
+                    <span className="read-more">Read →</span>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p className="no-challenges">No challenges yet</p>
+            )}
           </div>
         ))}
       </div>
