@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "../App.css";
 
 function Home() {
@@ -86,9 +87,9 @@ function Home() {
       </div>
 
       <div className="hero-buttons">
-        <a href="/writeups" className="btn btn-primary">
+        <Link to="/writeups" className="btn btn-primary">
           📝 View CTF Writeups
-        </a>
+        </Link>
         <a href="#projects" className="btn btn-secondary">
           🔧 Explore Projects
         </a>
