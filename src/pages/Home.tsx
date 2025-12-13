@@ -4,83 +4,59 @@ import "../App.css";
 function Home() {
   return (
     <section className="hero">
-      <div className="hero-greeting">👋 Hey there, I'm</div>
-      <h1>
-        Mohamed Radhouen Boufath <span className="nickname">aka Angel911</span>
-      </h1>
-      <p className="hero-intro">
-        I'm a curious and driven{" "}
-        <strong>Networks & Cybersecurity student</strong> who loves learning by
-        building, breaking, and defending systems — ethically, of course. 🛡️
-        Whether it's solving CTFs 🚩, digging into web exploitation 🕸️, or
-        scripting solutions to automate tasks ⚙️, I'm passionate about exploring
-        the inner workings of systems and the web. 🔍
-      </p>
+      <div className="hero-intro-section">
+        <p className="hero-greeting">Hey there, I'm</p>
+        <h1 className="hero-name">Mohamed Radhouen Boufath</h1>
+        <p className="hero-alias">aka Angel911</p>
+        <p className="hero-tagline">Networks & Cybersecurity Student</p>
+        <p className="hero-description">
+          I build, break, and defend systems — ethically. Passionate about CTFs,
+          web security, and creating tools that make a difference.
+        </p>
+      </div>
 
-      <div className="hero-content-wrapper">
-        <div className="hero-about">
-          <h2>🧠 About Me</h2>
+      <div className="hero-sections">
+        <div className="hero-card">
+          <h2>About Me</h2>
           <ul className="about-list">
             <li>
-              Constantly learning through hands-on labs, CTFs, and real-world
-              attack scenarios 🎯
+              Learning through hands-on labs, CTFs, and real-world scenarios
             </li>
-            <li>
-              Fascinated by web application security and how the internet can be
-              both powerful and vulnerable 🕸️
-            </li>
-            <li>
-              Curious about DevOps, system automation, and the tooling behind
-              secure development workflows ⚙️
-            </li>
-            <li>
-              Enjoy building things with JavaScript, diving into web
-              development, and writing clean, functional code 💻
-            </li>
-            <li>
-              Love simplifying security concepts and building small tools to
-              help others stay protected 🔐
-            </li>
+            <li>Fascinated by web application security and vulnerabilities</li>
+            <li>Building tools with JavaScript and Python</li>
+            <li>Exploring DevOps and secure development workflows</li>
           </ul>
         </div>
 
-        <div className="tech-stack">
-          <h2>🛠️ Tech Stack</h2>
-          <div className="tech-categories">
-            <div className="tech-category">
-              <span className="tech-label">💻 Operating Systems & Tools:</span>
-              <span className="tech-items">
-                Linux • Bash • Docker • Git • Wireshark • Burp Suite • Nmap • VS
-                Code
-              </span>
+        <div className="hero-card">
+          <h2>Skills</h2>
+          <div className="skills-grid">
+            <div className="skill-group">
+              <h3>Security</h3>
+              <div className="skill-tags">
+                <span>Web Exploitation</span>
+                <span>Forensics</span>
+                <span>Network Security</span>
+                <span>OSINT</span>
+              </div>
             </div>
-            <div className="tech-category">
-              <span className="tech-label">⚡ Programming & Scripting:</span>
-              <span className="tech-items">Python • JavaScript • Bash</span>
+            <div className="skill-group">
+              <h3>Development</h3>
+              <div className="skill-tags">
+                <span>React</span>
+                <span>Node.js</span>
+                <span>Python</span>
+                <span>TypeScript</span>
+              </div>
             </div>
-            <div className="tech-category">
-              <span className="tech-label">🌐 Web Development:</span>
-              <span className="tech-items">
-                HTML • CSS • Node.js • React.js • Angular • Firebase • REST APIs
-              </span>
-            </div>
-            <div className="tech-category">
-              <span className="tech-label">🗄️ Databases:</span>
-              <span className="tech-items">SQL • MongoDB</span>
-            </div>
-            <div className="tech-category">
-              <span className="tech-label">🔒 Cybersecurity & CTF:</span>
-              <span className="tech-items">
-                Web Exploitation • Forensics • Networks Security • Enumeration •
-                Privilege Escalation
-              </span>
-            </div>
-            <div className="tech-category">
-              <span className="tech-label">🚀 Learning & Exploring:</span>
-              <span className="tech-items">
-                DevOps Basics • Secure Development • Container Hardening • CI/CD
-                • Infrastructure as Code (IaC)
-              </span>
+            <div className="skill-group">
+              <h3>Tools</h3>
+              <div className="skill-tags">
+                <span>Burp Suite</span>
+                <span>Docker</span>
+                <span>Linux</span>
+                <span>Git</span>
+              </div>
             </div>
           </div>
         </div>
@@ -88,10 +64,10 @@ function Home() {
 
       <div className="hero-buttons">
         <Link to="/writeups" className="btn btn-primary">
-          📝 View CTF Writeups
+          View CTF Writeups
         </Link>
         <Link to="/projects" className="btn btn-secondary">
-          🔧 Explore Projects
+          Explore Projects
         </Link>
       </div>
     </section>

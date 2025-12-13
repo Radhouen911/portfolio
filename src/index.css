@@ -6,7 +6,7 @@
 
 :root {
   font-family: "Inter", system-ui, -apple-system, sans-serif;
-  line-height: 1.6;
+  line-height: 1.7;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.9);
   font-synthesis: none;
@@ -42,9 +42,15 @@ body {
 a {
   color: #a78bfa;
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: color 0.2s ease;
 }
 
 a:hover {
   color: #c4b5fd;
+}
+
+/* Code/mono font */
+code,
+.mono {
+  font-family: "JetBrains Mono", "Fira Code", monospace;
 }
