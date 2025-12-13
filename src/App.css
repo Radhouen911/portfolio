@@ -12,15 +12,15 @@
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  gap: 2rem;
+  padding-bottom: 8rem;
 }
 
 /* Terminal Window */
 .terminal-window {
   width: 100%;
-  max-width: 700px;
+  max-width: 950px;
   background: rgba(0, 0, 0, 0.6);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(167, 139, 250, 0.2);
@@ -166,38 +166,51 @@
   animation: blink 1s infinite;
 }
 
-/* Navigation Buttons */
+/* Navigation Buttons - Fixed Position */
 .nav-buttons {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 3rem;
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: row;
+  gap: 0.75rem;
+  z-index: 100;
 }
 
 .nav-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.875rem 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   color: rgba(255, 255, 255, 0.9);
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   transition: all 0.2s ease;
 }
 
 .nav-btn:hover {
-  background: rgba(167, 139, 250, 0.15);
-  border-color: rgba(167, 139, 250, 0.4);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.25);
   color: #fff;
 }
 
+.nav-btn.primary {
+  background: #a78bfa;
+  border-color: #a78bfa;
+  color: #0a0015;
+}
+
+.nav-btn.primary:hover {
+  background: #c4b5fd;
+  border-color: #c4b5fd;
+}
+
 .nav-icon {
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 /* Footer */
@@ -214,7 +227,7 @@
 @media (max-width: 768px) {
   .home {
     padding: 1.5rem;
-    padding-bottom: 2rem;
+    padding-bottom: 12rem;
   }
 
   .terminal-window {
@@ -243,18 +256,24 @@
   }
 
   .nav-buttons {
-    width: 100%;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    left: 1.5rem;
+    flex-direction: column;
   }
 
   .nav-btn {
-    flex: 1;
-    min-width: 140px;
+    width: 100%;
     justify-content: center;
-    padding: 0.75rem 1rem;
   }
 }
 
 @media (max-width: 480px) {
+  .home {
+    padding-bottom: 14rem;
+  }
+
   .terminal-body {
     font-size: 0.75rem;
   }
@@ -265,9 +284,5 @@
 
   .tree-item {
     font-size: 0.75rem;
-  }
-
-  .nav-btn {
-    min-width: 100%;
   }
 }
