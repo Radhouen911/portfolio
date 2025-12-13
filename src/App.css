@@ -235,7 +235,8 @@
 @media (max-width: 768px) {
   .home {
     padding: 1.5rem;
-    padding-bottom: 12rem;
+    padding-bottom: 1.5rem;
+    margin-bottom: 16rem;
   }
 
   .terminal-window {
@@ -279,7 +280,7 @@
 
 @media (max-width: 480px) {
   .home {
-    padding-bottom: 14rem;
+    margin-bottom: 18rem;
   }
 
   .terminal-body {
