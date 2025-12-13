@@ -87,7 +87,7 @@ function Home() {
       </div>
 
       <div className="hero-buttons">
-        <Link to="/portfolio/writeups" className="btn btn-primary">
+        <Link to="/writeups" className="btn btn-primary">
           📝 View CTF Writeups
         </Link>
         <a href="#projects" className="btn btn-secondary">
