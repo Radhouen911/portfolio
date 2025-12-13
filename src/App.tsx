@@ -1,6 +1,7 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home";
+import Projects from "./pages/Projects";
 import WriteupDetail from "./pages/WriteupDetail";
 import Writeups from "./pages/Writeups";
 
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/writeups" element={<Writeups />} />
           <Route path="/writeup/:ctf/:challenge" element={<WriteupDetail />} />
+          <Route path="/projects" element={<Projects />} />
         </Routes>
 
         <footer className="footer">

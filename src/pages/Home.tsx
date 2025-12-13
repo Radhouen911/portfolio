@@ -90,9 +90,9 @@ function Home() {
         <Link to="/writeups" className="btn btn-primary">
           📝 View CTF Writeups
         </Link>
-        <a href="#projects" className="btn btn-secondary">
+        <Link to="/projects" className="btn btn-secondary">
           🔧 Explore Projects
-        </a>
+        </Link>
       </div>
     </section>
   );
