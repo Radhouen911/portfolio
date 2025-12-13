@@ -6,7 +6,7 @@
 }
 
 .writeups-header {
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .writeups-header .back-button {
@@ -29,8 +29,32 @@
 }
 
 .writeups-header p {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.action-btn:hover {
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.4);
+  color: #fff;
 }
 
 .loading,
@@ -45,156 +69,125 @@
   color: #ff6b6b;
 }
 
-/* Layout */
-.writeups-layout {
+/* Accordion */
+.ctf-accordion {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.5rem;
 }
 
-/* CTF Tabs */
-.ctf-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+.ctf-item {
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(167, 139, 250, 0.1);
+  transition: all 0.2s ease;
 }
 
-.ctf-tab {
+.ctf-item.expanded {
+  border-color: rgba(167, 139, 250, 0.25);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.ctf-header {
+  width: 100%;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  padding: 0.75rem 1.25rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(167, 139, 250, 0.15);
-  border-radius: 10px;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: inherit;
 }
 
-.ctf-tab:hover {
-  background: rgba(167, 139, 250, 0.1);
-  border-color: rgba(167, 139, 250, 0.3);
+.ctf-header:hover {
+  background: rgba(167, 139, 250, 0.08);
 }
 
-.ctf-tab.active {
-  background: rgba(167, 139, 250, 0.15);
-  border-color: #a78bfa;
+.ctf-icon {
+  font-size: 1.1rem;
 }
 
-.ctf-tab-icon {
+.ctf-name {
+  flex: 1;
+  text-align: left;
   font-size: 1rem;
-}
-
-.ctf-tab-name {
+  font-weight: 600;
   color: #fff;
-  font-size: 0.95rem;
-  font-weight: 500;
 }
 
-.ctf-tab-count {
-  background: rgba(167, 139, 250, 0.25);
+.ctf-count {
+  background: rgba(167, 139, 250, 0.2);
   color: #c4b5fd;
-  padding: 0.15rem 0.5rem;
-  border-radius: 12px;
+  padding: 0.2rem 0.6rem;
+  border-radius: 10px;
   font-size: 0.75rem;
   font-weight: 600;
 }
 
-/* Challenges Panel */
-.challenges-panel {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(167, 139, 250, 0.1);
-  border-radius: 12px;
-  overflow: hidden;
+.ctf-chevron {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
 }
 
-.challenges-header {
+.ctf-chevron.open {
+  transform: rotate(180deg);
+}
+
+/* Challenges Grid */
+.ctf-challenges {
+  padding: 0.5rem 1rem 1rem;
+  border-top: 1px solid rgba(167, 139, 250, 0.08);
+}
+
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.challenge-link {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+  gap: 0.6rem;
+  padding: 0.65rem 0.9rem;
   background: rgba(0, 0, 0, 0.2);
-}
-
-.challenges-header h2 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #fff;
-  margin: 0;
-}
-
-.challenges-header span {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 0.9rem;
-}
-
-/* Challenge Items */
-.challenges-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.challenge-item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem 1.5rem;
+  border-radius: 6px;
   text-decoration: none;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.05);
   transition: all 0.2s ease;
 }
 
-.challenge-item:last-child {
-  border-bottom: none;
-}
-
-.challenge-item:hover {
-  background: rgba(167, 139, 250, 0.08);
+.challenge-link:hover {
+  background: rgba(167, 139, 250, 0.15);
+  transform: translateX(3px);
 }
 
 .challenge-icon {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   opacity: 0.7;
 }
 
 .challenge-name {
-  flex: 1;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.challenge-arrow {
-  color: #a78bfa;
-  font-size: 1rem;
-  opacity: 0;
-  transform: translateX(-5px);
-  transition: all 0.2s ease;
-}
-
-.challenge-item:hover .challenge-arrow {
-  opacity: 1;
-  transform: translateX(0);
+.challenge-link:hover .challenge-name {
+  color: #fff;
 }
 
 /* Empty State */
 .no-challenges {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.no-challenges span {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-.no-challenges p {
-  margin: 0;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  font-style: italic;
 }
 
 /* Responsive */
@@ -207,37 +200,28 @@
     font-size: 2rem;
   }
 
-  .ctf-tabs {
-    gap: 0.5rem;
+  .header-actions {
+    flex-wrap: wrap;
   }
 
-  .ctf-tab {
-    padding: 0.6rem 1rem;
+  .ctf-header {
+    padding: 0.875rem 1rem;
   }
 
-  .ctf-tab-name {
-    font-size: 0.85rem;
+  .ctf-name {
+    font-size: 0.95rem;
   }
 
-  .challenges-header {
-    padding: 1rem 1.25rem;
+  .challenges-grid {
+    grid-template-columns: 1fr;
   }
 
-  .challenges-header h2 {
-    font-size: 1.1rem;
-  }
-
-  .challenge-item {
-    padding: 0.875rem 1.25rem;
+  .challenge-link {
+    padding: 0.75rem 1rem;
   }
 
   .challenge-name {
     font-size: 0.9rem;
-  }
-
-  .challenge-arrow {
-    opacity: 1;
-    transform: translateX(0);
   }
 }
 
@@ -246,13 +230,12 @@
     padding: 1.5rem 1rem;
   }
 
-  .ctf-tab {
-    flex: 1;
-    min-width: calc(50% - 0.5rem);
-    justify-content: center;
+  .writeups-header h1 {
+    font-size: 1.75rem;
   }
 
-  .ctf-tab-icon {
-    display: none;
+  .action-btn {
+    flex: 1;
+    text-align: center;
   }
 }

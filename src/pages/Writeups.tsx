@@ -15,7 +15,7 @@ interface Challenge {
 
 function Writeups() {
   const [ctfFolders, setCtfFolders] = useState<CTFFolder[]>([]);
-  const [selectedCTF, setSelectedCTF] = useState<string | null>(null);
+  const [expandedCTFs, setExpandedCTFs] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -57,8 +57,9 @@ function Writeups() {
       );
 
       setCtfFolders(foldersWithChallenges);
+      // Expand first CTF by default
       if (foldersWithChallenges.length > 0) {
-        setSelectedCTF(foldersWithChallenges[0].name);
+        setExpandedCTFs(new Set([foldersWithChallenges[0].name]));
       }
       setLoading(false);
     } catch (err) {
@@ -67,7 +68,25 @@ function Writeups() {
     }
   };
 
-  const selectedCTFData = ctfFolders.find((ctf) => ctf.name === selectedCTF);
+  const toggleCTF = (ctfName: string) => {
+    setExpandedCTFs((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(ctfName)) {
+        newSet.delete(ctfName);
+      } else {
+        newSet.add(ctfName);
+      }
+      return newSet;
+    });
+  };
+
+  const expandAll = () => {
+    setExpandedCTFs(new Set(ctfFolders.map((ctf) => ctf.name)));
+  };
+
+  const collapseAll = () => {
+    setExpandedCTFs(new Set());
+  };
 
   if (loading) {
     return (
@@ -85,6 +104,11 @@ function Writeups() {
     );
   }
 
+  const totalWriteups = ctfFolders.reduce(
+    (acc, ctf) => acc + ctf.challenges.length,
+    0
+  );
+
   return (
     <div className="writeups-page">
       <div className="writeups-header">
@@ -92,57 +116,64 @@ function Writeups() {
           ← Back to Home
         </Link>
         <h1>📝 CTF Writeups</h1>
-        <p>Select a CTF to view challenges</p>
+        <p>
+          {ctfFolders.length} CTFs • {totalWriteups} writeups
+        </p>
+        <div className="header-actions">
+          <button onClick={expandAll} className="action-btn">
+            Expand All
+          </button>
+          <button onClick={collapseAll} className="action-btn">
+            Collapse All
+          </button>
+        </div>
       </div>
 
-      <div className="writeups-layout">
-        {/* CTF Tabs */}
-        <div className="ctf-tabs">
-          {ctfFolders.map((ctf) => (
-            <button
+      <div className="ctf-accordion">
+        {ctfFolders.map((ctf) => {
+          const isExpanded = expandedCTFs.has(ctf.name);
+          return (
+            <div
               key={ctf.name}
-              className={`ctf-tab ${selectedCTF === ctf.name ? "active" : ""}`}
-              onClick={() => setSelectedCTF(ctf.name)}
+              className={`ctf-item ${isExpanded ? "expanded" : ""}`}
             >
-              <span className="ctf-tab-icon">🚩</span>
-              <span className="ctf-tab-name">{ctf.name}</span>
-              <span className="ctf-tab-count">{ctf.challenges.length}</span>
-            </button>
-          ))}
-        </div>
+              <button
+                className="ctf-header"
+                onClick={() => toggleCTF(ctf.name)}
+              >
+                <span className="ctf-icon">{isExpanded ? "📂" : "📁"}</span>
+                <span className="ctf-name">{ctf.name}</span>
+                <span className="ctf-count">{ctf.challenges.length}</span>
+                <span className={`ctf-chevron ${isExpanded ? "open" : ""}`}>
+                  ▼
+                </span>
+              </button>
 
-        {/* Challenges List */}
-        <div className="challenges-panel">
-          {selectedCTFData && (
-            <>
-              <div className="challenges-header">
-                <h2>{selectedCTFData.name}</h2>
-                <span>{selectedCTFData.challenges.length} writeups</span>
-              </div>
-
-              {selectedCTFData.challenges.length > 0 ? (
-                <div className="challenges-list">
-                  {selectedCTFData.challenges.map((challenge) => (
-                    <Link
-                      key={challenge.path}
-                      to={`/writeup/${challenge.path}`}
-                      className="challenge-item"
-                    >
-                      <span className="challenge-icon">📄</span>
-                      <span className="challenge-name">{challenge.name}</span>
-                      <span className="challenge-arrow">→</span>
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <div className="no-challenges">
-                  <span>📭</span>
-                  <p>No writeups yet for this CTF</p>
+              {isExpanded && (
+                <div className="ctf-challenges">
+                  {ctf.challenges.length > 0 ? (
+                    <div className="challenges-grid">
+                      {ctf.challenges.map((challenge) => (
+                        <Link
+                          key={challenge.path}
+                          to={`/writeup/${challenge.path}`}
+                          className="challenge-link"
+                        >
+                          <span className="challenge-icon">📄</span>
+                          <span className="challenge-name">
+                            {challenge.name}
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="no-challenges">No writeups yet</div>
+                  )}
                 </div>
               )}
-            </>
-          )}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
