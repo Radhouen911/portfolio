@@ -2,35 +2,19 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Single Page Apps for GitHub Pages</title>
+    <title>Redirecting...</title>
     <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // MIT License
-      // https://github.com/rafgraph/spa-github-pages
-      // This script takes the current url and converts the path and query
-      // string into just a query string, and then redirects the browser
-      // to the new url with only a query string and hash fragment,
-      // e.g. https://example.com/foo/bar?baz=qux#section
-      // becomes https://example.com/?/foo/bar&baz=qux#section
-      // Note: this 404.html file must be at least 512 bytes for it to work
-      // with Internet Explorer (it is currently > 512 bytes)
+      // For SPA routing on GitHub Pages with subdirectory
+      // Redirect any 404 to the index.html and let React Router handle it
+      var path = window.location.pathname;
+      var search = window.location.search;
+      var hash = window.location.hash;
 
-      (function (l) {
-        if (l.search[1] === "/") {
-          var decoded = l.search
-            .slice(1)
-            .split("&")
-            .map(function (s) {
-              return s.replace(/~and~/g, "&");
-            })
-            .join("?");
-          window.history.replaceState(
-            null,
-            null,
-            l.pathname.slice(0, -1) + decoded + l.hash
-          );
-        }
-      })(window.location);
+      // Store the path in sessionStorage so index.html can use it
+      sessionStorage.setItem("redirect", path + search + hash);
+
+      // Redirect to index.html
+      window.location.replace("/portfolio/");
     </script>
   </head>
   <body></body>
