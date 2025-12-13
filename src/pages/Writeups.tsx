@@ -15,6 +15,7 @@ interface Challenge {
 
 function Writeups() {
   const [ctfFolders, setCtfFolders] = useState<CTFFolder[]>([]);
+  const [selectedCTF, setSelectedCTF] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -56,6 +57,9 @@ function Writeups() {
       );
 
       setCtfFolders(foldersWithChallenges);
+      if (foldersWithChallenges.length > 0) {
+        setSelectedCTF(foldersWithChallenges[0].name);
+      }
       setLoading(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
@@ -63,19 +67,11 @@ function Writeups() {
     }
   };
 
-  const getCTFIcon = (name: string): string => {
-    const lowerName = name.toLowerCase();
-    if (lowerName.includes("hack") || lowerName.includes("htb")) return "🎯";
-    if (lowerName.includes("try") || lowerName.includes("thm")) return "🔓";
-    if (lowerName.includes("cyber")) return "🛡️";
-    if (lowerName.includes("root")) return "🌳";
-    if (lowerName.includes("pico")) return "🏴";
-    return "🚩";
-  };
+  const selectedCTFData = ctfFolders.find((ctf) => ctf.name === selectedCTF);
 
   if (loading) {
     return (
-      <div className="writeups-container">
+      <div className="writeups-page">
         <div className="loading">Loading CTF writeups... 🔍</div>
       </div>
     );
@@ -83,55 +79,70 @@ function Writeups() {
 
   if (error) {
     return (
-      <div className="writeups-container">
+      <div className="writeups-page">
         <div className="error">Error: {error}</div>
       </div>
     );
   }
 
   return (
-    <div className="writeups-container">
-      <Link to="/" className="back-button">
-        ← Back to Home
-      </Link>
-      <h1 className="writeups-title">📝 CTF Writeups</h1>
-      <p className="writeups-subtitle">
-        My collection of Capture The Flag challenge solutions and walkthroughs
-      </p>
+    <div className="writeups-page">
+      <div className="writeups-header">
+        <Link to="/" className="back-button">
+          ← Back to Home
+        </Link>
+        <h1>📝 CTF Writeups</h1>
+        <p>Select a CTF to view challenges</p>
+      </div>
 
-      <div className="ctf-folders">
-        {ctfFolders.map((ctf) => (
-          <div key={ctf.name} className="ctf-folder">
-            <div className="ctf-header">
-              <div className="ctf-icon">{getCTFIcon(ctf.name)}</div>
-              <h2 className="ctf-name">{ctf.name}</h2>
-              <span className="ctf-count">
-                {ctf.challenges.length}{" "}
-                {ctf.challenges.length === 1 ? "challenge" : "challenges"}
-              </span>
-            </div>
+      <div className="writeups-layout">
+        {/* CTF Tabs */}
+        <div className="ctf-tabs">
+          {ctfFolders.map((ctf) => (
+            <button
+              key={ctf.name}
+              className={`ctf-tab ${selectedCTF === ctf.name ? "active" : ""}`}
+              onClick={() => setSelectedCTF(ctf.name)}
+            >
+              <span className="ctf-tab-icon">🚩</span>
+              <span className="ctf-tab-name">{ctf.name}</span>
+              <span className="ctf-tab-count">{ctf.challenges.length}</span>
+            </button>
+          ))}
+        </div>
 
-            {ctf.challenges.length > 0 ? (
-              <div className="challenges-grid">
-                {ctf.challenges.map((challenge, index) => (
-                  <Link
-                    key={challenge.path}
-                    to={`/writeup/${challenge.path}`}
-                    className="challenge-card"
-                  >
-                    <div className="challenge-info">
-                      <span className="challenge-number">{index + 1}</span>
-                      <h3>{challenge.name}</h3>
-                    </div>
-                    <span className="read-more">Read →</span>
-                  </Link>
-                ))}
+        {/* Challenges List */}
+        <div className="challenges-panel">
+          {selectedCTFData && (
+            <>
+              <div className="challenges-header">
+                <h2>{selectedCTFData.name}</h2>
+                <span>{selectedCTFData.challenges.length} writeups</span>
               </div>
-            ) : (
-              <p className="no-challenges">No challenges yet</p>
-            )}
-          </div>
-        ))}
+
+              {selectedCTFData.challenges.length > 0 ? (
+                <div className="challenges-list">
+                  {selectedCTFData.challenges.map((challenge) => (
+                    <Link
+                      key={challenge.path}
+                      to={`/writeup/${challenge.path}`}
+                      className="challenge-item"
+                    >
+                      <span className="challenge-icon">📄</span>
+                      <span className="challenge-name">{challenge.name}</span>
+                      <span className="challenge-arrow">→</span>
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="no-challenges">
+                  <span>📭</span>
+                  <p>No writeups yet for this CTF</p>
+                </div>
+              )}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

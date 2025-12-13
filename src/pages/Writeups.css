@@ -1,40 +1,42 @@
-.writeups-container {
+.writeups-page {
   min-height: 100vh;
-  padding: 4rem 6rem;
-  max-width: 1400px;
+  padding: 3rem 4rem;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
-.back-button {
+.writeups-header {
+  margin-bottom: 2.5rem;
+}
+
+.writeups-header .back-button {
   display: inline-block;
   color: #a78bfa;
-  font-size: 1rem;
-  margin-bottom: 2rem;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
   transition: transform 0.2s ease;
 }
 
-.back-button:hover {
+.writeups-header .back-button:hover {
   transform: translateX(-5px);
 }
 
-.writeups-title {
-  font-size: 3rem;
-  font-weight: 900;
+.writeups-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
   color: #fff;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.writeups-subtitle {
-  font-size: 1.2rem;
-  color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 3rem;
-  max-width: 600px;
+.writeups-header p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
 }
 
 .loading,
 .error {
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.8);
   padding: 4rem;
 }
@@ -43,182 +45,214 @@
   color: #ff6b6b;
 }
 
-/* CTF Sections */
-.ctf-folders {
+/* Layout */
+.writeups-layout {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 1.5rem;
 }
 
-.ctf-folder {
-  position: relative;
+/* CTF Tabs */
+.ctf-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
-.ctf-header {
+.ctf-tab {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid rgba(167, 139, 250, 0.2);
-}
-
-.ctf-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, #7c3aed, #a78bfa);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-
-.ctf-name {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 0;
-}
-
-.ctf-count {
-  background: rgba(167, 139, 250, 0.2);
-  color: #c4b5fd;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  margin-left: auto;
-}
-
-/* Challenge Cards */
-.challenges-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
-}
-
-.challenge-card {
+  gap: 0.6rem;
+  padding: 0.75rem 1.25rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(167, 139, 250, 0.15);
   border-radius: 10px;
-  padding: 1.25rem 1.5rem;
-  transition: all 0.25s ease;
-  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.ctf-tab:hover {
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.3);
+}
+
+.ctf-tab.active {
+  background: rgba(167, 139, 250, 0.15);
+  border-color: #a78bfa;
+}
+
+.ctf-tab-icon {
+  font-size: 1rem;
+}
+
+.ctf-tab-name {
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.ctf-tab-count {
+  background: rgba(167, 139, 250, 0.25);
+  color: #c4b5fd;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Challenges Panel */
+.challenges-panel {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(167, 139, 250, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.challenges-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+  background: rgba(0, 0, 0, 0.2);
 }
 
-.challenge-card:hover {
-  background: rgba(167, 139, 250, 0.1);
-  border-color: rgba(167, 139, 250, 0.4);
-  transform: translateX(5px);
-}
-
-.challenge-info {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex: 1;
-  min-width: 0;
-}
-
-.challenge-number {
-  width: 32px;
-  height: 32px;
-  background: rgba(167, 139, 250, 0.15);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
+.challenges-header h2 {
+  font-size: 1.25rem;
   font-weight: 600;
-  color: #a78bfa;
-  flex-shrink: 0;
-}
-
-.challenge-card h3 {
-  font-size: 1rem;
   color: #fff;
   margin: 0;
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.read-more {
+.challenges-header span {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+}
+
+/* Challenge Items */
+.challenges-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.challenge-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.05);
+  transition: all 0.2s ease;
+}
+
+.challenge-item:last-child {
+  border-bottom: none;
+}
+
+.challenge-item:hover {
+  background: rgba(167, 139, 250, 0.08);
+}
+
+.challenge-icon {
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
+
+.challenge-name {
+  flex: 1;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+}
+
+.challenge-arrow {
   color: #a78bfa;
-  font-size: 0.85rem;
-  font-weight: 500;
-  flex-shrink: 0;
+  font-size: 1rem;
   opacity: 0;
-  transform: translateX(-10px);
-  transition: all 0.25s ease;
+  transform: translateX(-5px);
+  transition: all 0.2s ease;
 }
 
-.challenge-card:hover .read-more {
+.challenge-item:hover .challenge-arrow {
   opacity: 1;
   transform: translateX(0);
 }
 
 /* Empty State */
 .no-challenges {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
   color: rgba(255, 255, 255, 0.5);
-  font-style: italic;
-  padding: 1rem;
+}
+
+.no-challenges span {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.no-challenges p {
+  margin: 0;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .writeups-container {
+  .writeups-page {
     padding: 2rem 1.5rem;
   }
 
-  .writeups-title {
+  .writeups-header h1 {
     font-size: 2rem;
   }
 
-  .writeups-subtitle {
-    font-size: 1rem;
-    margin-bottom: 2rem;
+  .ctf-tabs {
+    gap: 0.5rem;
   }
 
-  .ctf-header {
-    flex-wrap: wrap;
+  .ctf-tab {
+    padding: 0.6rem 1rem;
   }
 
-  .ctf-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.25rem;
+  .ctf-tab-name {
+    font-size: 0.85rem;
   }
 
-  .ctf-name {
-    font-size: 1.4rem;
-  }
-
-  .ctf-count {
-    margin-left: 0;
-  }
-
-  .challenges-grid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-
-  .challenge-card {
+  .challenges-header {
     padding: 1rem 1.25rem;
   }
 
-  .challenge-card h3 {
-    font-size: 0.95rem;
+  .challenges-header h2 {
+    font-size: 1.1rem;
   }
 
-  .read-more {
+  .challenge-item {
+    padding: 0.875rem 1.25rem;
+  }
+
+  .challenge-name {
+    font-size: 0.9rem;
+  }
+
+  .challenge-arrow {
     opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .writeups-page {
+    padding: 1.5rem 1rem;
+  }
+
+  .ctf-tab {
+    flex: 1;
+    min-width: calc(50% - 0.5rem);
+    justify-content: center;
+  }
+
+  .ctf-tab-icon {
+    display: none;
   }
 }
