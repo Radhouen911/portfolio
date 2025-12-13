@@ -11,28 +11,28 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 1.5rem;
   padding-bottom: 8rem;
 }
 
 /* Terminal Window */
 .terminal-window {
   width: 100%;
-  max-width: 950px;
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
+  max-width: 1400px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(167, 139, 250, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(167, 139, 250, 0.15);
 }
 
 .terminal-header {
-  background: rgba(30, 20, 50, 0.8);
-  padding: 0.75rem 1rem;
+  background: rgba(20, 10, 40, 0.9);
+  padding: 0.6rem 1.2rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+  gap: 0.8rem;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.08);
 }
 
 .terminal-dots {
@@ -63,16 +63,18 @@
 }
 
 .terminal-body {
-  padding: 1.5rem;
+  padding: 1.25rem 1.5rem;
   font-family: "JetBrains Mono", monospace;
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .terminal-line {
   display: flex;
-  gap: 0.75rem;
-  margin-bottom: 0.25rem;
+  gap: 0.6rem;
+  margin-bottom: 0.15rem;
 }
 
 .prompt {
@@ -85,13 +87,13 @@
 }
 
 .terminal-output {
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 1.25rem;
-  padding-left: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.8rem;
+  padding-left: 1.2rem;
 }
 
 .name-output {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: 700;
   color: #fff;
   font-family: "Inter", sans-serif;
@@ -99,7 +101,7 @@
 
 .typing {
   color: #a78bfa;
-  font-size: 1rem;
+  font-size: 0.85rem;
 }
 
 .cursor {
@@ -125,7 +127,7 @@
 
 .skills-output {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.2rem;
   flex-wrap: wrap;
 }
 
@@ -136,7 +138,7 @@
 .tree-output {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.6rem;
 }
 
 .tree-section {
@@ -147,17 +149,17 @@
 .tree-folder {
   color: #22d3ee;
   font-weight: 600;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.15rem;
 }
 
 .tree-item {
-  color: rgba(255, 255, 255, 0.6);
-  padding-left: 0.5rem;
-  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.55);
+  padding-left: 0.4rem;
+  font-size: 0.8rem;
 }
 
 .terminal-line.active {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
   margin-bottom: 0;
 }
 
