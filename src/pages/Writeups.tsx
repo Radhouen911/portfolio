@@ -91,7 +91,10 @@ function Writeups() {
   if (loading) {
     return (
       <div className="writeups-page">
-        <div className="loading">Loading CTF writeups... 🔍</div>
+        <div className="loading">
+          <div className="spinner"></div>
+          <div className="loading-text">Loading CTF writeups...</div>
+        </div>
       </div>
     );
   }
