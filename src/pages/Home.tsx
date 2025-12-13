@@ -1,76 +1,128 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 
 function Home() {
-  return (
-    <section className="hero">
-      <div className="hero-intro-section">
-        <p className="hero-greeting">Hey there, I'm</p>
-        <h1 className="hero-name">Mohamed Radhouen Boufath</h1>
-        <p className="hero-alias">aka Angel911</p>
-        <p className="hero-tagline">Networks & Cybersecurity Student</p>
-        <p className="hero-description">
-          I build, break, and defend systems — ethically. Passionate about CTFs,
-          web security, and creating tools that make a difference.
-        </p>
-      </div>
+  const [typedText, setTypedText] = useState("");
+  const fullText = "Networks & Cybersecurity Student";
 
-      <div className="hero-sections">
-        <div className="hero-card">
-          <h2>About Me</h2>
-          <ul className="about-list">
-            <li>
-              Learning through hands-on labs, CTFs, and real-world scenarios
-            </li>
-            <li>Fascinated by web application security and vulnerabilities</li>
-            <li>Building tools with JavaScript and Python</li>
-            <li>Exploring DevOps and secure development workflows</li>
-          </ul>
+  useEffect(() => {
+    let i = 0;
+    const timer = setInterval(() => {
+      if (i < fullText.length) {
+        setTypedText(fullText.slice(0, i + 1));
+        i++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 50);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="home">
+      <div className="terminal-window">
+        <div className="terminal-header">
+          <div className="terminal-dots">
+            <span className="dot red"></span>
+            <span className="dot yellow"></span>
+            <span className="dot green"></span>
+          </div>
+          <span className="terminal-title">angel911@portfolio ~ </span>
         </div>
 
-        <div className="hero-card">
-          <h2>Skills</h2>
-          <div className="skills-grid">
-            <div className="skill-group">
-              <h3>Security</h3>
-              <div className="skill-tags">
-                <span>Web Exploitation</span>
-                <span>Forensics</span>
-                <span>Network Security</span>
-                <span>OSINT</span>
-              </div>
+        <div className="terminal-body">
+          <div className="terminal-line">
+            <span className="prompt">$</span>
+            <span className="command">whoami</span>
+          </div>
+          <div className="terminal-output name-output">
+            Mohamed Radhouen Boufath
+          </div>
+
+          <div className="terminal-line">
+            <span className="prompt">$</span>
+            <span className="command">cat role.txt</span>
+          </div>
+          <div className="terminal-output typing">
+            {typedText}
+            <span className="cursor">|</span>
+          </div>
+
+          <div className="terminal-line">
+            <span className="prompt">$</span>
+            <span className="command">cat about.md</span>
+          </div>
+          <div className="terminal-output about-output">
+            <p>I build, break, and defend systems — ethically.</p>
+            <p>Passionate about CTFs, web security, and automation.</p>
+          </div>
+
+          <div className="terminal-line">
+            <span className="prompt">$</span>
+            <span className="command">ls skills/</span>
+          </div>
+          <div className="terminal-output skills-output">
+            <span className="folder">security/</span>
+            <span className="folder">development/</span>
+            <span className="folder">tools/</span>
+          </div>
+
+          <div className="terminal-line">
+            <span className="prompt">$</span>
+            <span className="command">tree skills/ --depth 1</span>
+          </div>
+          <div className="terminal-output tree-output">
+            <div className="tree-section">
+              <span className="tree-folder">security/</span>
+              <span className="tree-item">├── web-exploitation</span>
+              <span className="tree-item">├── forensics</span>
+              <span className="tree-item">├── network-security</span>
+              <span className="tree-item">└── privilege-escalation</span>
             </div>
-            <div className="skill-group">
-              <h3>Development</h3>
-              <div className="skill-tags">
-                <span>React</span>
-                <span>Node.js</span>
-                <span>Python</span>
-                <span>TypeScript</span>
-              </div>
+            <div className="tree-section">
+              <span className="tree-folder">development/</span>
+              <span className="tree-item">├── react</span>
+              <span className="tree-item">├── node.js</span>
+              <span className="tree-item">├── python</span>
+              <span className="tree-item">└── typescript</span>
             </div>
-            <div className="skill-group">
-              <h3>Tools</h3>
-              <div className="skill-tags">
-                <span>Burp Suite</span>
-                <span>Docker</span>
-                <span>Linux</span>
-                <span>Git</span>
-              </div>
+            <div className="tree-section">
+              <span className="tree-folder">tools/</span>
+              <span className="tree-item">├── burp-suite</span>
+              <span className="tree-item">├── docker</span>
+              <span className="tree-item">├── linux</span>
+              <span className="tree-item">└── git</span>
             </div>
+          </div>
+
+          <div className="terminal-line active">
+            <span className="prompt">$</span>
+            <span className="cursor-blink">_</span>
           </div>
         </div>
       </div>
 
-      <div className="hero-buttons">
-        <Link to="/writeups" className="btn btn-primary">
-          View CTF Writeups
+      <div className="nav-buttons">
+        <Link to="/writeups" className="nav-btn">
+          <span className="nav-icon">📝</span>
+          <span className="nav-text">CTF Writeups</span>
         </Link>
-        <Link to="/projects" className="btn btn-secondary">
-          Explore Projects
+        <Link to="/projects" className="nav-btn">
+          <span className="nav-icon">🔧</span>
+          <span className="nav-text">Projects</span>
         </Link>
+        <a
+          href="https://github.com/Radhouen911"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nav-btn"
+        >
+          <span className="nav-icon">⚡</span>
+          <span className="nav-text">GitHub</span>
+        </a>
       </div>
-    </section>
+    </div>
   );
 }
 
