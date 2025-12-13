@@ -32,16 +32,14 @@
   border-radius: 12px;
   padding: 1.75rem;
   transition: all 0.3s ease;
-  text-decoration: none;
   display: flex;
   flex-direction: column;
-  min-height: 220px;
+  min-height: 240px;
 }
 
 .project-card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(167, 139, 250, 0.5);
-  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.3);
+  border-color: rgba(167, 139, 250, 0.4);
+  box-shadow: 0 5px 20px rgba(124, 58, 237, 0.2);
 }
 
 .project-header {
@@ -85,15 +83,43 @@
   font-weight: 500;
 }
 
-.view-repo {
-  color: #a78bfa;
-  font-size: 0.9rem;
-  font-weight: 500;
+.project-actions {
+  display: flex;
+  gap: 1rem;
   margin-top: auto;
+  flex-wrap: wrap;
 }
 
-.project-card:hover .view-repo {
+.read-readme,
+.view-github {
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.read-readme {
+  background: rgba(167, 139, 250, 0.2);
   color: #c4b5fd;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+}
+
+.read-readme:hover {
+  background: rgba(167, 139, 250, 0.3);
+  border-color: #a78bfa;
+}
+
+.view-github {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.view-github:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
 
 /* Mobile Responsive */

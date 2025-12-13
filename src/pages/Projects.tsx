@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./Projects.css";
 
 interface Project {
+  id: string;
   name: string;
   fullName?: string;
   repo: string;
@@ -11,6 +12,7 @@ interface Project {
 
 const projects: Project[] = [
   {
+    id: "ctfd-react-frontend",
     name: "CTFd React Frontend",
     repo: "https://github.com/Radhouen911/CTFd-React-Frontend911",
     description:
@@ -18,6 +20,7 @@ const projects: Project[] = [
     tags: ["React", "CTFd", "CTF", "Production"],
   },
   {
+    id: "onos-mininet-ai",
     name: "ONOS Mininet AI Optimized",
     repo: "https://github.com/Radhouen911/OnosMininet-AiOptimized",
     description:
@@ -25,6 +28,7 @@ const projects: Project[] = [
     tags: ["Networking", "ONOS", "Mininet", "Containers"],
   },
   {
+    id: "ctfd-whale-fork",
     name: "CTFd Whale Fork",
     repo: "https://github.com/Radhouen911/ctfd-whale-fork",
     description:
@@ -32,6 +36,7 @@ const projects: Project[] = [
     tags: ["CTFd", "FRP", "Docker", "Production"],
   },
   {
+    id: "telegram-scraper",
     name: "Telegram Scraper Group Adder",
     repo: "https://github.com/Radhouen911/Telegram-scraper-groupadder",
     description:
@@ -39,6 +44,7 @@ const projects: Project[] = [
     tags: ["Python", "Telegram", "Automation"],
   },
   {
+    id: "bpamt",
     name: "BPAMT",
     fullName: "Baby Push All My Tasks",
     repo: "https://github.com/Radhouen911/BPAMT",
@@ -47,6 +53,7 @@ const projects: Project[] = [
     tags: ["Python", "CTFd", "Automation"],
   },
   {
+    id: "pooling-app",
     name: "Pooling App",
     repo: "https://github.com/Radhouen911/PoolingApp",
     description:
@@ -54,6 +61,7 @@ const projects: Project[] = [
     tags: ["Laravel", "React", "Fullstack"],
   },
   {
+    id: "bugbountyx",
     name: "BugBountyX",
     repo: "https://github.com/Radhouen911/BugBountyX",
     description:
@@ -76,13 +84,7 @@ function Projects() {
 
       <div className="projects-grid">
         {projects.map((project) => (
-          <a
-            key={project.name}
-            href={project.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-card"
-          >
+          <div key={project.id} className="project-card">
             <div className="project-header">
               <h3>{project.name}</h3>
               {project.fullName && (
@@ -97,8 +99,20 @@ function Projects() {
                 </span>
               ))}
             </div>
-            <span className="view-repo">View on GitHub →</span>
-          </a>
+            <div className="project-actions">
+              <Link to={`/project/${project.id}`} className="read-readme">
+                📖 Read README
+              </Link>
+              <a
+                href={project.repo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="view-github"
+              >
+                🔗 View on GitHub
+              </a>
+            </div>
+          </div>
         ))}
       </div>
     </div>
