@@ -1,0 +1,212 @@
+.cv-page {
+  min-height: 100vh;
+  padding: 1rem;
+  width: 100%;
+}
+
+.cv-header {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.cv-header .back-button {
+  display: inline-block;
+  color: #a78bfa;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease;
+  text-decoration: none;
+}
+
+.cv-header .back-button:hover {
+  transform: translateX(-5px);
+}
+
+.cv-header h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.cv-header p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1rem;
+}
+
+.cv-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.language-selector {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.lang-btn {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 8px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.lang-btn:hover {
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.4);
+  color: #fff;
+}
+
+.lang-btn.active {
+  background: #a78bfa;
+  border-color: #a78bfa;
+  color: #0a0015;
+}
+
+.cv-viewer {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(167, 139, 250, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.cv-actions {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid rgba(167, 139, 250, 0.1);
+  justify-content: center;
+}
+
+.download-btn,
+.view-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.download-btn {
+  background: #a78bfa;
+  border: 1px solid #a78bfa;
+  color: #0a0015;
+}
+
+.download-btn:hover {
+  background: #c4b5fd;
+  border-color: #c4b5fd;
+}
+
+.view-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.view-btn:hover {
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.4);
+  color: #fff;
+}
+
+.btn-icon {
+  font-size: 0.9rem;
+}
+
+.pdf-container {
+  height: 95vh;
+  min-height: 900px;
+  background: #fff;
+  width: 100%;
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .cv-page {
+    padding: 0.5rem;
+  }
+
+  .cv-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .language-selector {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .lang-btn {
+    min-width: 120px;
+    text-align: center;
+  }
+
+  .cv-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .download-btn,
+  .view-btn {
+    justify-content: center;
+  }
+
+  .pdf-container {
+    height: 92vh;
+    min-height: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cv-page {
+    padding: 0.25rem;
+  }
+
+  .cv-header {
+    padding: 0 0.5rem;
+  }
+
+  .cv-header h1 {
+    font-size: 1.6rem;
+  }
+
+  .lang-btn {
+    flex: 1;
+    min-width: 100px;
+  }
+
+  .cv-actions {
+    padding: 0.5rem;
+  }
+
+  .pdf-container {
+    height: 90vh;
+    min-height: 600px;
+  }
+}

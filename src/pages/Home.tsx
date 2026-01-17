@@ -112,6 +112,10 @@ function Home() {
           <span className="nav-icon">🔧</span>
           <span className="nav-text">Projects</span>
         </Link>
+        <Link to="/cv" className="nav-btn">
+          <span className="nav-icon">📄</span>
+          <span className="nav-text">My CV</span>
+        </Link>
         <a
           href="https://github.com/Radhouen911"
           target="_blank"
