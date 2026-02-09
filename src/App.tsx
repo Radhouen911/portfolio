@@ -9,7 +9,7 @@ import Writeups from "./pages/Writeups";
 
 function App() {
   return (
-    <Router basename="/portfolio">
+    <Router>
       <div className="app">
         <Routes>
           <Route path="/" element={<Home />} />
