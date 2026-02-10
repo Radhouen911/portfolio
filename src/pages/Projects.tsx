@@ -8,9 +8,19 @@ interface Project {
   repo: string;
   description: string;
   tags: string[];
+  previewUrl?: string;
 }
 
 const projects: Project[] = [
+  {
+    id: "voidlink",
+    name: "VoidLink",
+    repo: "https://github.com/Radhouen911/VoidLink",
+    description:
+      "Zero-trust secure messaging system where privacy is mathematically guaranteed. All cryptographic operations happen client-side, creating mathematical privacy guarantees instead of relying on policy promises.",
+    tags: ["React", "NodeJS", "Cryptography", "Zero-Trust", "Security"],
+    previewUrl: "https://radhouen911.github.io/VoidLink/",
+  },
   {
     id: "ctfd-react-frontend",
     name: "CTFd React Frontend",
@@ -18,6 +28,7 @@ const projects: Project[] = [
     description:
       "Custom React-based CTFd frontend fully compatible with CTFd, used as the official theme for CyberMaze 5 (2025).",
     tags: ["React", "CTFd", "CTF", "Production"],
+    previewUrl: "https://cybermaze-v5.espark.tn/",
   },
   {
     id: "onos-mininet-ai",
@@ -103,6 +114,16 @@ function Projects() {
               <Link to={`/project/${project.id}`} className="read-readme">
                 📖 Read README
               </Link>
+              {project.previewUrl && (
+                <a
+                  href={project.previewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="view-preview"
+                >
+                  🚀 View Preview
+                </a>
+              )}
               <a
                 href={project.repo}
                 target="_blank"
