@@ -85,19 +85,24 @@
 
 .project-actions {
   display: flex;
-  gap: 1rem;
+  gap: 0.5rem;
   margin-top: auto;
   flex-wrap: wrap;
 }
 
 .read-readme,
+.view-preview,
 .view-github {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 500;
-  padding: 0.5rem 1rem;
+  padding: 0.45rem 0.6rem;
   border-radius: 6px;
   text-decoration: none;
   transition: all 0.2s ease;
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+  line-height: 1.2;
 }
 
 .read-readme {
@@ -109,6 +114,17 @@
 .read-readme:hover {
   background: rgba(167, 139, 250, 0.3);
   border-color: #a78bfa;
+}
+
+.view-preview {
+  background: #a78bfa;
+  color: #0a0015;
+  border: 1px solid #a78bfa;
+}
+
+.view-preview:hover {
+  background: #c4b5fd;
+  border-color: #c4b5fd;
 }
 
 .view-github {
