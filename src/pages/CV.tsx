@@ -4,10 +4,11 @@ import "./CV.css";
 
 function CV() {
   const [selectedLanguage, setSelectedLanguage] = useState<"en" | "fr">("en");
+  const cvBasePath = import.meta.env.BASE_URL;
 
   const cvFiles = {
-    en: "/portfolio/CV_radhoueneng.pdf",
-    fr: "/portfolio/cv_radhouenboufatehfr.pdf",
+    en: `${cvBasePath}CV_radhoueneng.pdf`,
+    fr: `${cvBasePath}cv_radhouenboufatehfr.pdf`,
   };
 
   const handleDownload = (language: "en" | "fr") => {

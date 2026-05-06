@@ -13,6 +13,15 @@ interface Challenge {
   path: string;
 }
 
+interface GitTreeItem {
+  path: string;
+  type: string;
+}
+
+interface GitTreeResponse {
+  tree?: GitTreeItem[];
+}
+
 function Writeups() {
   const [ctfFolders, setCtfFolders] = useState<CTFFolder[]>([]);
   const [expandedCTFs, setExpandedCTFs] = useState<Set<string>>(new Set());
@@ -21,52 +30,90 @@ function Writeups() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const controller = new AbortController();
+
+    const fetchCTFFolders = async () => {
+      try {
+        const response = await fetch(
+          "https://api.github.com/repos/Radhouen911/CTF-Writeups/git/trees/main?recursive=1",
+          { signal: controller.signal }
+        );
+
+        if (!response.ok) {
+          const masterResponse = await fetch(
+            "https://api.github.com/repos/Radhouen911/CTF-Writeups/git/trees/master?recursive=1",
+            { signal: controller.signal }
+          );
+
+          if (!masterResponse.ok) {
+            throw new Error("Failed to fetch CTF writeups tree");
+          }
+
+          const masterData = (await masterResponse.json()) as GitTreeResponse;
+          if (!controller.signal.aborted) {
+            setCtfFolders(buildFoldersFromTree(masterData.tree ?? []));
+            setLoading(false);
+          }
+          return;
+        }
+
+        const data = (await response.json()) as GitTreeResponse;
+        if (!controller.signal.aborted) {
+          setCtfFolders(buildFoldersFromTree(data.tree ?? []));
+          setLoading(false);
+        }
+      } catch (err) {
+        if (controller.signal.aborted) return;
+        setError(err instanceof Error ? err.message : "An error occurred");
+        setLoading(false);
+      }
+    };
+
+    const buildFoldersFromTree = (tree: GitTreeItem[]): CTFFolder[] => {
+      const folderMap = new Map<string, CTFFolder>();
+
+      for (const item of tree) {
+        if (item.type !== "blob" || !item.path.endsWith("/WRITEUP.md")) {
+          continue;
+        }
+
+        const [ctfName, challengeName] = item.path.split("/");
+        if (!ctfName || !challengeName) {
+          continue;
+        }
+
+        const existingFolder = folderMap.get(ctfName);
+        const challenge = {
+          name: challengeName,
+          path: `${ctfName}/${challengeName}`,
+        };
+
+        if (existingFolder) {
+          existingFolder.challenges.push(challenge);
+        } else {
+          folderMap.set(ctfName, {
+            name: ctfName,
+            path: ctfName,
+            challenges: [challenge],
+          });
+        }
+      }
+
+      return Array.from(folderMap.values()).sort((left, right) =>
+        left.name.localeCompare(right.name)
+      );
+    };
+
     fetchCTFFolders();
+
+    return () => controller.abort();
   }, []);
 
-  const fetchCTFFolders = async () => {
-    try {
-      const response = await fetch(
-        "https://api.github.com/repos/Radhouen911/CTF-Writeups/contents/"
-      );
-
-      if (!response.ok) throw new Error("Failed to fetch CTF folders");
-
-      const data = await response.json();
-      const folders = data.filter((item: any) => item.type === "dir");
-
-      const foldersWithChallenges = await Promise.all(
-        folders.map(async (folder: any) => {
-          const challengesResponse = await fetch(
-            `https://api.github.com/repos/Radhouen911/CTF-Writeups/contents/${folder.name}`
-          );
-          const challengesData = await challengesResponse.json();
-          const challenges = challengesData
-            .filter((item: any) => item.type === "dir")
-            .map((challenge: any) => ({
-              name: challenge.name,
-              path: `${folder.name}/${challenge.name}`,
-            }));
-
-          return {
-            name: folder.name,
-            path: folder.path,
-            challenges,
-          };
-        })
-      );
-
-      setCtfFolders(foldersWithChallenges);
-      // Expand first CTF by default
-      if (foldersWithChallenges.length > 0) {
-        setExpandedCTFs(new Set([foldersWithChallenges[0].name]));
-      }
-      setLoading(false);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
-      setLoading(false);
+  useEffect(() => {
+    if (ctfFolders.length > 0) {
+      setExpandedCTFs(new Set([ctfFolders[0].name]));
     }
-  };
+  }, [ctfFolders]);
 
   const toggleCTF = (ctfName: string) => {
     setExpandedCTFs((prev) => {
@@ -159,7 +206,7 @@ function Writeups() {
                       {ctf.challenges.map((challenge) => (
                         <Link
                           key={challenge.path}
-                          to={`/writeup/${challenge.path}`}
+                          to={`/writeup/${encodeURIComponent(ctf.name)}/${encodeURIComponent(challenge.name)}`}
                           className="challenge-link"
                         >
                           <span className="challenge-icon">📄</span>
