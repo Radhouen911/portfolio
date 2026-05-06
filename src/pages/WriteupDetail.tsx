@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Link, useParams } from "react-router-dom";
 import "./WriteupDetail.css";
 
@@ -11,25 +12,37 @@ function WriteupDetail() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const controller = new AbortController();
+
+    const fetchWriteup = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        setContent("");
+
+        const response = await fetch(
+          `https://raw.githubusercontent.com/Radhouen911/CTF-Writeups/main/${encodeURIComponent(ctf ?? "")}/${encodeURIComponent(challenge ?? "")}/WRITEUP.md`,
+          { signal: controller.signal }
+        );
+
+        if (!response.ok) throw new Error("Writeup not found");
+
+        const text = await response.text();
+        if (!controller.signal.aborted) {
+          setContent(text);
+          setLoading(false);
+        }
+      } catch (err) {
+        if (controller.signal.aborted) return;
+        setError(err instanceof Error ? err.message : "An error occurred");
+        setLoading(false);
+      }
+    };
+
     fetchWriteup();
+
+    return () => controller.abort();
   }, [ctf, challenge]);
-
-  const fetchWriteup = async () => {
-    try {
-      const response = await fetch(
-        `https://raw.githubusercontent.com/Radhouen911/CTF-Writeups/main/${ctf}/${challenge}/WRITEUP.md`
-      );
-
-      if (!response.ok) throw new Error("Writeup not found");
-
-      const text = await response.text();
-      setContent(text);
-      setLoading(false);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (
@@ -60,7 +73,7 @@ function WriteupDetail() {
         <h1 className="challenge-title">{challenge}</h1>
       </div>
       <div className="markdown-content">
-        <ReactMarkdown>{content}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{content}</ReactMarkdown>
       </div>
     </div>
   );

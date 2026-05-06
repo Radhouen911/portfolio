@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Link, useParams } from "react-router-dom";
 import "./ProjectDetail.css";
 
@@ -13,6 +14,23 @@ interface Project {
 }
 
 const projectsData: Record<string, Project> = {
+  voidlink: {
+    name: "VoidLink",
+    repo: "https://github.com/Radhouen911/VoidLink",
+    repoPath: "Radhouen911/VoidLink",
+    description:
+      "Zero-trust secure messaging system where privacy is mathematically guaranteed. All cryptographic operations happen client-side, creating mathematical privacy guarantees instead of relying on policy promises.",
+    tags: ["React", "NodeJS", "Cryptography", "Zero-Trust", "Security"],
+  },
+  "container-instancer-ctfd-guide": {
+    name: "CTFd Multi-VPS Infrastructure Guide",
+    fullName: "Ramadhan CTF Multi-VPS Infrastructure Guide",
+    repo: "https://github.com/Radhouen911/container_instancer_CTFd_guide",
+    repoPath: "Radhouen911/container_instancer_CTFd_guide",
+    description:
+      "Battle-tested guide for multi-VPS CTFd + Whale deployment. Covers Docker Swarm, FRP, and custom React frontends as a production-ready roadmap for scalable, secure CTF infrastructure.",
+    tags: ["CTFd", "Whale", "Docker Swarm", "FRP", "DevOps"],
+  },
   "ctfd-react-frontend": {
     name: "CTFd React Frontend",
     repo: "https://github.com/Radhouen911/CTFd-React-Frontend911",
@@ -82,37 +100,57 @@ function ProjectDetail() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (project) {
-      fetchReadme();
-    }
-  }, [projectId]);
+    const controller = new AbortController();
 
-  const fetchReadme = async () => {
-    if (!project) return;
-
-    try {
-      const response = await fetch(
-        `https://raw.githubusercontent.com/${project.repoPath}/main/README.md`
-      );
-
-      if (!response.ok) {
-        // Try master branch if main doesn't exist
-        const masterResponse = await fetch(
-          `https://raw.githubusercontent.com/${project.repoPath}/master/README.md`
-        );
-        if (!masterResponse.ok) throw new Error("README not found");
-        const text = await masterResponse.text();
-        setReadme(text);
-      } else {
-        const text = await response.text();
-        setReadme(text);
+    const fetchReadme = async () => {
+      if (!project) {
+        setLoading(false);
+        setError(null);
+        setReadme("");
+        return;
       }
-      setLoading(false);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "An error occurred");
-      setLoading(false);
-    }
-  };
+
+      setLoading(true);
+      setError(null);
+      setReadme("");
+
+      try {
+        const response = await fetch(
+          `https://raw.githubusercontent.com/${project.repoPath}/main/README.md`,
+          { signal: controller.signal }
+        );
+
+        if (!response.ok) {
+          const masterResponse = await fetch(
+            `https://raw.githubusercontent.com/${project.repoPath}/master/README.md`,
+            { signal: controller.signal }
+          );
+          if (!masterResponse.ok) throw new Error("README not found");
+          const text = await masterResponse.text();
+          if (!controller.signal.aborted) {
+            setReadme(text);
+          }
+        } else {
+          const text = await response.text();
+          if (!controller.signal.aborted) {
+            setReadme(text);
+          }
+        }
+
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      } catch (err) {
+        if (controller.signal.aborted) return;
+        setError(err instanceof Error ? err.message : "An error occurred");
+        setLoading(false);
+      }
+    };
+
+    fetchReadme();
+
+    return () => controller.abort();
+  }, [projectId, project]);
 
   if (!project) {
     return (
@@ -172,7 +210,7 @@ function ProjectDetail() {
           </div>
         ) : (
           <div className="readme-content">
-            <ReactMarkdown>{readme}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{readme}</ReactMarkdown>
           </div>
         )}
       </div>

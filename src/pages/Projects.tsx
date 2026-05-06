@@ -22,6 +22,15 @@ const projects: Project[] = [
     previewUrl: "https://radhouen911.github.io/VoidLink/",
   },
   {
+    id: "container-instancer-ctfd-guide",
+    name: "CTFd Multi-VPS Infrastructure Guide",
+    fullName: "Ramadhan CTF Multi-VPS Infrastructure Guide",
+    repo: "https://github.com/Radhouen911/container_instancer_CTFd_guide",
+    description:
+      "Battle-tested guide for multi-VPS CTFd + Whale deployment. Covers Docker Swarm, FRP, and custom React frontends as a production-ready roadmap for scalable, secure CTF infrastructure.",
+    tags: ["CTFd", "Whale", "Docker Swarm", "FRP", "DevOps"],
+  },
+  {
     id: "ctfd-react-frontend",
     name: "CTFd React Frontend",
     repo: "https://github.com/Radhouen911/CTFd-React-Frontend911",
