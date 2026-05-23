@@ -31,6 +31,33 @@ const projects: Project[] = [
     tags: ["CTFd", "Whale", "Docker Swarm", "FRP", "DevOps"],
   },
   {
+    id: "aiesec-application-tracker",
+    name: "AIESEC Applications Dashboard",
+    fullName: "AIESEC Bardo Applications Dashboard",
+    repo: "https://github.com/Radhouen911/aiesec_application_tracker",
+    description:
+      "React-based dashboard for AIESEC Bardo applications and applicants. Pulls live GraphQL data, shows trends, pivot tables, and programme analytics for daily and monthly reporting.",
+    tags: ["React", "AIESEC", "Graphs", "Analytics", "Dashboard"],
+  },
+  {
+    id: "discord-auto-deletechannel",
+    name: "Discord Auto Delete Channel",
+    repo: "https://github.com/Radhouen911/discord-auto-deletechannel",
+    description:
+      "Small Discord bot utility that scans a guild for channels matching a naming rule and deletes them on demand. Useful for cleaning up temporary or ticket-style channels.",
+    tags: ["Python", "Discord", "Automation"],
+  },
+  {
+    id: "ramadhan-ctfd-frontend",
+    name: "Ramadhan CTFd Theme",
+    fullName: "RamadhanCTF Frontend",
+    repo: "https://github.com/Radhouen911/RamadhanCTF-Frontend",
+    description:
+      "Ramadan-themed CTFd frontend mounted inside the CTFd theme system. Includes landing, scoreboard, team management, profile pages, and archive-mode support.",
+    tags: ["React", "CTFd", "TypeScript", "Tailwind", "Frontend"],
+    previewUrl: "https://radhouen911.github.io/RamadhanCTF-Frontend/",
+  },
+  {
     id: "ctfd-react-frontend",
     name: "CTFd React Frontend",
     repo: "https://github.com/Radhouen911/CTFd-React-Frontend911",

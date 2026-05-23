@@ -31,6 +31,32 @@ const projectsData: Record<string, Project> = {
       "Battle-tested guide for multi-VPS CTFd + Whale deployment. Covers Docker Swarm, FRP, and custom React frontends as a production-ready roadmap for scalable, secure CTF infrastructure.",
     tags: ["CTFd", "Whale", "Docker Swarm", "FRP", "DevOps"],
   },
+  "aiesec-application-tracker": {
+    name: "AIESEC Applications Dashboard",
+    fullName: "AIESEC Bardo Applications Dashboard",
+    repo: "https://github.com/Radhouen911/aiesec_application_tracker",
+    repoPath: "Radhouen911/aiesec_application_tracker",
+    description:
+      "React-based dashboard for AIESEC Bardo applications and applicants. Pulls live GraphQL data, shows trends, pivot tables, and programme analytics for daily and monthly reporting.",
+    tags: ["React", "AIESEC", "Graphs", "Analytics", "Dashboard"],
+  },
+  "discord-auto-deletechannel": {
+    name: "Discord Auto Delete Channel",
+    repo: "https://github.com/Radhouen911/discord-auto-deletechannel",
+    repoPath: "Radhouen911/discord-auto-deletechannel",
+    description:
+      "Small Discord bot utility that scans a guild for channels matching a naming rule and deletes them on demand. Useful for cleaning up temporary or ticket-style channels.",
+    tags: ["Python", "Discord", "Automation"],
+  },
+  "ramadhan-ctfd-frontend": {
+    name: "Ramadhan CTFd Theme",
+    fullName: "RamadhanCTF Frontend",
+    repo: "https://github.com/Radhouen911/RamadhanCTF-Frontend",
+    repoPath: "Radhouen911/RamadhanCTF-Frontend",
+    description:
+      "Ramadan-themed CTFd frontend mounted inside the CTFd theme system. Includes landing, scoreboard, team management, profile pages, and archive-mode support.",
+    tags: ["React", "CTFd", "TypeScript", "Tailwind", "Frontend"],
+  },
   "ctfd-react-frontend": {
     name: "CTFd React Frontend",
     repo: "https://github.com/Radhouen911/CTFd-React-Frontend911",
