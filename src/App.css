@@ -126,6 +126,23 @@
   }
 }
 
+.edu-output {
+  margin-top: -0.4rem;
+}
+
+.edu-link {
+  color: #a78bfa;
+  font-size: 0.78rem;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(167, 139, 250, 0.5);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.edu-link:hover {
+  color: #c4b5fd;
+  border-bottom-color: #c4b5fd;
+}
+
 .about-output p {
   margin: 0.25rem 0;
   color: rgba(255, 255, 255, 0.7);
@@ -143,25 +160,46 @@
 
 .tree-output {
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .tree-section {
   display: flex;
   flex-direction: column;
+  min-width: 180px;
+  padding: 0.75rem 1rem;
+  background: rgba(167, 139, 250, 0.06);
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  border-radius: 6px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.tree-section:hover {
+  background: rgba(167, 139, 250, 0.1);
+  border-color: rgba(167, 139, 250, 0.3);
 }
 
 .tree-folder {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   color: #22d3ee;
   font-weight: 600;
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.15);
+}
+
+.tree-folder-icon {
+  font-size: 0.85rem;
 }
 
 .tree-item {
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.6);
   padding-left: 0.4rem;
   font-size: 0.8rem;
+  line-height: 1.6;
 }
 
 .terminal-line.active {

@@ -4,7 +4,7 @@ import "../App.css";
 
 function Home() {
   const [typedText, setTypedText] = useState("");
-  const fullText = "Networks & Cybersecurity Student";
+  const fullText = "Networks Security Graduate @ ISETCOM";
 
   useEffect(() => {
     let i = 0;
@@ -48,13 +48,25 @@ function Home() {
             {typedText}
             <span className="cursor">|</span>
           </div>
+          {typedText.length === fullText.length && (
+            <div className="terminal-output edu-output">
+              <a
+                href="https://isetcom.tn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="edu-link"
+              >
+                Higher Institute of Technological Studies in Communications (ISETCOM)
+              </a>
+            </div>
+          )}
 
           <div className="terminal-line">
             <span className="prompt">$</span>
             <span className="command">cat about.md</span>
           </div>
           <div className="terminal-output about-output">
-            <p>I build, break, and defend systems — ethically.</p>
+            <p>I build, break, and defend systems, ethically.</p>
             <p>Passionate about CTFs, web security, and automation.</p>
           </div>
 
@@ -74,21 +86,27 @@ function Home() {
           </div>
           <div className="terminal-output tree-output">
             <div className="tree-section">
-              <span className="tree-folder">security/</span>
+              <span className="tree-folder">
+                <span className="tree-folder-icon">📁</span>security/
+              </span>
               <span className="tree-item">├── web-exploitation</span>
               <span className="tree-item">├── forensics</span>
               <span className="tree-item">├── network-security</span>
               <span className="tree-item">└── privilege-escalation</span>
             </div>
             <div className="tree-section">
-              <span className="tree-folder">development/</span>
+              <span className="tree-folder">
+                <span className="tree-folder-icon">📁</span>development/
+              </span>
               <span className="tree-item">├── react</span>
               <span className="tree-item">├── node.js</span>
               <span className="tree-item">├── python</span>
-              <span className="tree-item">└── typescript</span>
+              <span className="tree-item">└── django</span>
             </div>
             <div className="tree-section">
-              <span className="tree-folder">tools/</span>
+              <span className="tree-folder">
+                <span className="tree-folder-icon">📁</span>tools/
+              </span>
               <span className="tree-item">├── burp-suite</span>
               <span className="tree-item">├── docker</span>
               <span className="tree-item">├── linux</span>
