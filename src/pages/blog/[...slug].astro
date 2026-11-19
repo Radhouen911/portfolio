@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", (p) => import.meta.env.DEV || !p.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(post);
+const fmt = new Intl.DateTimeFormat("en", { year: "numeric", month: "long", day: "numeric" });
+const words = (post.body ?? "").split(/\s+/).length;
+const minutes = Math.max(1, Math.round(words / 220));
+---
+
+<Base title={post.data.title} description={post.data.description} type="article">
+  <article class="narrow">
+    <header class="post-head">
+      <a href="/blog">← All posts</a>
+      <h1>{post.data.title}</h1>
+      <div class="post-meta">
+        <time datetime={post.data.pubDate.toISOString()}>{fmt.format(post.data.pubDate)}</time>
+        <span>·</span>
+        <span>{minutes} min read</span>
+        {post.data.draft && <span class="chip">Draft (dev only)</span>}
+        {post.data.tags.map((t) => <span class="chip">{t}</span>)}
+      </div>
+    </header>
+    <div class="prose">
+      <Content />
+      {post.data.source && (
+        <p><a href={post.data.source} target="_blank" rel="noopener">View this write-up's source on GitHub ↗</a></p>
+      )}
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,101 @@
+---
+import { getCollection } from "astro:content";
+import PostCard from "../components/PostCard.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import Base from "../layouts/Base.astro";
+import { projects } from "../data/projects";
+import { site } from "../data/site";
+
+const featured = projects.filter((p) => p.featured);
+const posts = (await getCollection("blog", (p) => import.meta.env.DEV || !p.data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const skills = [
+  { title: "Security", items: ["Web exploitation", "Digital forensics", "Network security", "Privilege escalation", "CTF"] },
+  { title: "Development", items: ["React", "Node.js", "Python", "Django", "TypeScript"] },
+  { title: "Tools & infra", items: ["Burp Suite", "Docker", "Linux", "Git", "CTFd"] },
+];
+---
+
+<Base>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <span class="badge">Open to internships</span>
+        <h1>Hi, I'm Radhouen. <em>{site.headline}</em></h1>
+        <p class="lead">
+          Networks &amp; security graduate from <a href={site.schoolUrl} target="_blank" rel="noopener">{site.school}</a>,
+          Tunisia. I play and organize CTFs, build web platforms, and write about what I learn.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href="/cv">View my CV</a>
+          <a class="btn" href={`mailto:${site.email}`}>Get in touch</a>
+          <a class="btn" href="/blog">Read the blog</a>
+        </div>
+        <div class="meta">
+          <a href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href={site.github} target="_blank" rel="noopener">GitHub ↗</a>
+          <span>Also known as {site.handle}</span>
+        </div>
+      </div>
+      <img class="portrait" src="/photo.jpg" alt="Portrait of Mohamed Radhouen Boufath" width="640" height="800" fetchpriority="high" />
+    </section>
+
+    <section class="block" id="about">
+      <div class="about">
+        <div>
+          <p class="eyebrow">About</p>
+          <div class="block-head"><h2>Security-minded, build-first.</h2></div>
+          <p>
+            I study how networks and web applications fail, then build things that don't. That means breaking
+            challenges in CTFs, and also shipping real software: I built the platform frontend and challenge
+            infrastructure that ran CyberMaze 5, a live CTF competition.
+          </p>
+          <p>
+            I'm looking for an internship where I can work on security, networks or web engineering with a team that
+            cares about doing it properly.
+          </p>
+        </div>
+        <div class="skills">
+          {skills.map((s) => (
+            <div>
+              <h3>{s.title}</h3>
+              <div>{s.items.map((i) => <span class="chip">{i}</span>)}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="block-head">
+        <h2>Selected projects</h2>
+        <a href="/projects">All projects →</a>
+      </div>
+      <div class="grid">{featured.map((p) => <ProjectCard project={p} />)}</div>
+    </section>
+
+    <section class="block">
+      <div class="block-head">
+        <h2>Latest writing</h2>
+        <a href="/blog">All posts →</a>
+      </div>
+      <div class="grid">{posts.map((p) => <PostCard post={p} />)}</div>
+    </section>
+
+    <section class="block">
+      <div class="contact-card">
+        <h2>Let's talk</h2>
+        <p>
+          Hiring for an internship, or want to talk security? Email is the fastest way to reach me.
+        </p>
+        <div class="cta">
+          <a class="btn primary" href={`mailto:${site.email}`}>Email me</a>
+          <a class="btn" href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="/cv">Download CV</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</Base>

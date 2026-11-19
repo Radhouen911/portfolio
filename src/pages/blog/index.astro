@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import PostCard from "../../components/PostCard.astro";
+import Base from "../../layouts/Base.astro";
+
+const posts = (await getCollection("blog", (p) => import.meta.env.DEV || !p.data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const tags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+---
+
+<Base title="Blog" description="Security write-ups, CTF walkthroughs and notes from building things.">
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">Blog</p>
+      <h1>Notes & write-ups</h1>
+      <p>CTF walkthroughs, security notes and lessons from building things. <a href="/rss.xml">RSS</a></p>
+    </div>
+
+    {tags.length > 0 && (
+      <div class="filters" role="group" aria-label="Filter by tag">
+        <button type="button" data-tag="" aria-pressed="true">All</button>
+        {tags.map((t) => <button type="button" data-tag={t} aria-pressed="false">{t}</button>)}
+      </div>
+    )}
+
+    <div class="grid" style="padding-bottom: 72px" id="posts">
+      {posts.map((p) => <PostCard post={p} />)}
+    </div>
+  </div>
+
+  <script is:inline>
+    var buttons = document.querySelectorAll(".filters button");
+    var cards = document.querySelectorAll("#posts .card");
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var tag = b.dataset.tag;
+        buttons.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        cards.forEach(function (c) {
+          c.hidden = !!tag && c.dataset.tags.split("|").indexOf(tag) === -1;
+        });
+      });
+    });
+  </script>
+</Base>

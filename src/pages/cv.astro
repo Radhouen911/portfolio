@@ -1,0 +1,46 @@
+---
+import Base from "../layouts/Base.astro";
+
+const cvs = {
+  en: { file: "/CV_radhoueneng.pdf", label: "English", name: "CV_Mohamed_Radhouen_Boufath_EN.pdf" },
+  fr: { file: "/cv_radhouenboufatehfr.pdf", label: "Français", name: "CV_Mohamed_Radhouen_Boufath_FR.pdf" },
+};
+---
+
+<Base title="CV" description="Curriculum vitae of Mohamed Radhouen Boufath, available in English and French.">
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">Curriculum vitae</p>
+      <h1>My CV</h1>
+      <p>Available in English and French. For anything else, email me.</p>
+    </div>
+
+    <div class="cv-actions">
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-lang="fr" aria-pressed="false">Français</button>
+      </div>
+      <a class="btn primary" id="dl" href={cvs.en.file} download={cvs.en.name}>Download PDF</a>
+      <a class="btn" id="open" href={cvs.en.file} target="_blank" rel="noopener">Open in new tab</a>
+    </div>
+
+    <iframe class="cv-frame" id="frame" src={cvs.en.file} title="CV preview"></iframe>
+    <p style="margin: 12px 0 72px; color: var(--muted); font-size: 15px">
+      Can't see the preview on your device? Use the download button.
+    </p>
+  </div>
+
+  <script is:inline define:vars={{ cvs }}>
+    var buttons = document.querySelectorAll(".seg button");
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        var cv = cvs[b.dataset.lang];
+        buttons.forEach(function (x) { x.setAttribute("aria-pressed", String(x === b)); });
+        document.getElementById("frame").src = cv.file;
+        var dl = document.getElementById("dl");
+        dl.href = cv.file; dl.download = cv.name;
+        document.getElementById("open").href = cv.file;
+      });
+    });
+  </script>
+</Base>

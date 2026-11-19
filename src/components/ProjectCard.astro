@@ -1,0 +1,14 @@
+---
+import type { Project } from "../data/projects";
+const { project } = Astro.props as { project: Project };
+---
+
+<article class="card">
+  <h3>{project.name}</h3>
+  <p>{project.summary}</p>
+  <div class="tags">{project.tags.map((t) => <span class="chip">{t}</span>)}</div>
+  <div class="links">
+    {project.live && <a href={project.live} target="_blank" rel="noopener">Live demo ↗</a>}
+    <a href={project.repo} target="_blank" rel="noopener">Source ↗</a>
+  </div>
+</article>

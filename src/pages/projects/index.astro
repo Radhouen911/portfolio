@@ -1,0 +1,16 @@
+---
+import ProjectCard from "../../components/ProjectCard.astro";
+import Base from "../../layouts/Base.astro";
+import { projects } from "../../data/projects";
+---
+
+<Base title="Projects" description="Web platforms, security tools and network labs built by Mohamed Radhouen Boufath.">
+  <div class="wrap">
+    <div class="page-head">
+      <p class="eyebrow">Projects</p>
+      <h1>Things I've built</h1>
+      <p>Platforms used in real competitions, security experiments, and automation tools. All source is public.</p>
+    </div>
+    <div class="grid" style="padding-bottom: 72px">{projects.map((p) => <ProjectCard project={p} />)}</div>
+  </div>
+</Base>

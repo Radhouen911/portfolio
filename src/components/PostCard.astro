@@ -1,0 +1,12 @@
+---
+import type { CollectionEntry } from "astro:content";
+const { post } = Astro.props as { post: CollectionEntry<"blog"> };
+const fmt = new Intl.DateTimeFormat("en", { year: "numeric", month: "short", day: "numeric" });
+---
+
+<a class="card" href={`/blog/${post.id}`} data-tags={post.data.tags.join("|")}>
+  <time datetime={post.data.pubDate.toISOString()}>{fmt.format(post.data.pubDate)}</time>
+  <h3>{post.data.title}</h3>
+  <p>{post.data.description}</p>
+  <div class="tags">{post.data.tags.map((t) => <span class="chip">{t}</span>)}</div>
+</a>
