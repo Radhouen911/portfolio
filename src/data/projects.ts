@@ -5,7 +5,6 @@ export interface Project {
   live?: string;
   summary: string;
   tags: string[];
-  featured?: boolean;
 }
 
 export const projects: Project[] = [
@@ -17,7 +16,6 @@ export const projects: Project[] = [
     summary:
       "Zero-trust secure messaging. All cryptography runs client-side, so privacy comes from the design rather than from a promise.",
     tags: ["React", "Node.js", "Cryptography"],
-    featured: true,
   },
   {
     id: "ctfd-react-frontend",
@@ -27,7 +25,6 @@ export const projects: Project[] = [
     summary:
       "A custom React frontend for CTFd, used as the official platform theme for CyberMaze 5 (2025) in production.",
     tags: ["React", "CTFd", "Production"],
-    featured: true,
   },
   {
     id: "onos-mininet-ai",
@@ -36,7 +33,6 @@ export const projects: Project[] = [
     summary:
       "Three-container SDN lab integrating ONOS and Mininet, with a middleware container that optimizes routing and network performance.",
     tags: ["Networking", "SDN", "Containers"],
-    featured: true,
   },
   {
     id: "ctfd-multi-vps-guide",

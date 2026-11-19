@@ -6,6 +6,17 @@ import { existsSync } from "node:fs";
 
 const REPO = "Radhouen911/CTF-Writeups";
 const OUT = "src/content/blog/ctf-writeups";
+const GUIDES = "src/content/blog/guides";
+const GUIDE_SOURCES = [
+  {
+    repo: "Radhouen911/container_instancer_CTFd_guide",
+    slug: "ctfd-multi-vps-infrastructure-guide",
+    title: "CTFd Multi-VPS Infrastructure Guide",
+    description:
+      "A production-grade CTF setup across two VPS nodes: CTFd, a hardened Whale plugin fork and a custom React frontend, orchestrated with Docker Compose and Swarm.",
+    tags: ["Guide", "CTFd", "DevOps"],
+  },
+];
 const headers = { "User-Agent": "static-site-build", Accept: "application/vnd.github+json" };
 if (process.env.GITHUB_TOKEN) headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
 
@@ -57,6 +68,30 @@ try {
     await writeFile(`${OUT}/${slugify(ctf)}--${slugify(challenge)}.md`, fm + body);
   }
   console.log(`[sync-writeups] wrote ${files.length} writeups`);
+
+  // Long-form guides that live in their own repo's README.
+  await rm(GUIDES, { recursive: true, force: true });
+  await mkdir(GUIDES, { recursive: true });
+  for (const g of GUIDE_SOURCES) {
+    const res = await fetch(`https://raw.githubusercontent.com/${g.repo}/main/README.md`);
+    if (!res.ok) throw new Error(`${res.status} ${g.repo} README`);
+    let body = (await res.text()).replace(/^﻿/, "");
+    body = body.replace(/^# .+$/m, "").trimStart();
+    const commits = await gh(`https://api.github.com/repos/${g.repo}/commits?path=README.md&per_page=1`);
+    const date = commits[0]?.commit?.committer?.date ?? new Date().toISOString();
+    const fm = [
+      "---",
+      `title: ${q(g.title)}`,
+      `description: ${q(g.description)}`,
+      `pubDate: ${date}`,
+      `tags: ${JSON.stringify(g.tags)}`,
+      `source: ${q(`https://github.com/${g.repo}`)}`,
+      "---",
+      "",
+    ].join("\n");
+    await writeFile(`${GUIDES}/${g.slug}.md`, fm + body);
+  }
+  console.log(`[sync-writeups] wrote ${GUIDE_SOURCES.length} guide(s)`);
 } catch (err) {
   console.warn(`[sync-writeups] ${err.message} - ${existsSync(OUT) ? "keeping previously synced writeups" : "continuing without CTF writeups"}`);
   await mkdir(OUT, { recursive: true });

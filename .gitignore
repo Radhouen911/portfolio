@@ -6,3 +6,4 @@ dist
 !.vscode/extensions.json
 # generated at build time from the CTF-Writeups repo
 src/content/blog/ctf-writeups/
+src/content/blog/guides/

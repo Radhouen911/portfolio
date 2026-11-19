@@ -6,15 +6,16 @@ import Base from "../layouts/Base.astro";
 import { projects } from "../data/projects";
 import { site } from "../data/site";
 
-const featured = projects.filter((p) => p.featured);
+const featuredIds = ["ctfd-whale-fork", "ctfd-react-frontend", "onos-mininet-ai"];
+const featured = featuredIds.map((id) => projects.find((p) => p.id === id)!);
 const posts = (await getCollection("blog", (p) => import.meta.env.DEV || !p.data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
 const skills = [
-  { title: "Security", items: ["Web exploitation", "Digital forensics", "Network security", "Privilege escalation", "CTF"] },
-  { title: "Development", items: ["React", "Node.js", "Python", "Django", "TypeScript"] },
-  { title: "Tools & infra", items: ["Burp Suite", "Docker", "Linux", "Git", "CTFd"] },
+  { title: "Security", items: ["Web exploitation", "Binary exploitation", "Hack The Box", "CTF"] },
+  { title: "Development", items: ["React", "Node.js", "Python", "Django", "TypeScript", "SQL", "SQLite"] },
+  { title: "Tools & infra", items: ["Burp Suite", "Docker", "Traefik", "Nginx", "Azure", "AWS", "Linux", "Git", "CTFd"] },
 ];
 ---
 
@@ -22,11 +23,12 @@ const skills = [
   <div class="wrap">
     <section class="hero">
       <div>
-        <span class="badge">Open to internships</span>
+        <span class="badge">Open to work</span>
         <h1>Hi, I'm Radhouen. <em>{site.headline}</em></h1>
         <p class="lead">
-          Networks &amp; security graduate from <a href={site.schoolUrl} target="_blank" rel="noopener">{site.school}</a>,
-          Tunisia. I play and organize CTFs, build web platforms, and write about what I learn.
+          Cybersecurity engineering student at iTeam University, with a bachelor's in Networks
+          Security from <a href={site.schoolUrl} target="_blank" rel="noopener">{site.school}</a>, Tunisia. I play and
+          organize CTFs, build web platforms, and write about what I learn.
         </p>
         <div class="cta">
           <a class="btn primary" href="/cv">View my CV</a>
@@ -39,7 +41,9 @@ const skills = [
           <span>Also known as {site.handle}</span>
         </div>
       </div>
-      <img class="portrait" src="/photo.jpg" alt="Portrait of Mohamed Radhouen Boufath" width="640" height="800" fetchpriority="high" />
+      <div class="portrait">
+        <img src="/photo.jpg" alt="Portrait of Mohamed Radhouen Boufath" width="640" height="640" fetchpriority="high" />
+      </div>
     </section>
 
     <section class="block" id="about">
@@ -49,12 +53,11 @@ const skills = [
           <div class="block-head"><h2>Security-minded, build-first.</h2></div>
           <p>
             I study how networks and web applications fail, then build things that don't. That means breaking
-            challenges in CTFs, and also shipping real software: I built the platform frontend and challenge
-            infrastructure that ran CyberMaze 5, a live CTF competition.
+            challenges in CTFs, and also shipping real software. I've managed lots of CTF platforms.
           </p>
           <p>
-            I'm looking for an internship where I can work on security, networks or web engineering with a team that
-            cares about doing it properly.
+            I'm open to work, internships included, in security, networks or web engineering, with a team that cares
+            about doing it properly.
           </p>
         </div>
         <div class="skills">
@@ -88,7 +91,7 @@ const skills = [
       <div class="contact-card">
         <h2>Let's talk</h2>
         <p>
-          Hiring for an internship, or want to talk security? Email is the fastest way to reach me.
+          Hiring, or want to talk security? Email is the fastest way to reach me.
         </p>
         <div class="cta">
           <a class="btn primary" href={`mailto:${site.email}`}>Email me</a>

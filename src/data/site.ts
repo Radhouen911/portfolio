@@ -8,5 +8,5 @@ export const site = {
   schoolUrl: "https://isetcom.tn",
   headline: "I build secure systems, and the tools to test them.",
   description:
-    "Networks & security graduate from Tunisia. CTF player and organizer, web developer, open to internships.",
+    "Cybersecurity engineering student at iTeam University with a bachelor's in Networks Security from ISETCOM. CTF player and organizer, web developer, open to work.",
 };
